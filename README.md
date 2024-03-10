@@ -1,1 +1,1 @@
-# -django-rest-allauth
+# django-rest-allauth
