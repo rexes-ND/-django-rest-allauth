@@ -1,0 +1,317 @@
+{
+	"info": {
+		"_postman_id": "f5d6fdab-9c19-4b76-a624-2337af174444",
+		"name": "djauth",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21999756"
+	},
+	"item": [
+		{
+			"name": "users/",
+			"item": [
+				{
+					"name": "register/",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"test4@gmail.com\",\n    \"password1\": \"user1234\",\n    \"password2\": \"user1234\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/users/register/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								"register",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "resend-email/",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"test4@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/users/resend-email/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								"resend-email",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "verify-email/",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"key\": \"NA:1rjuPk:GZZ1XepAvj2owz_bZyRac3IUJxWzIKR5QxBY2qzWweo\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/users/verify-email/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								"verify-email",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login/",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let jsonData = JSON.parse(responseBody);",
+									"pm.collectionVariables.set(\"access\", jsonData.access);",
+									"pm.collectionVariables.set(\"refresh\", jsonData.refresh);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"test4@gmail.com\",\n    \"password\": \"user12345\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/users/login/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								"login",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/users/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "password-reset/",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"test4@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/users/password-reset/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								"password-reset",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "password-reset-confirm/",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"uid\": \"4\",\n    \"token\": \"c3rhoo-8e9e651c05e94fecc454bb5d2ea77db3\",\n    \"new_password1\": \"user12345\",\n    \"new_password2\": \"user12345\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/users/password-reset-confirm/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								"password-reset-confirm",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "password-change/",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"new_password1\": \"user1234\",\n    \"new_password2\": \"user1234\",\n    \"old_password\": \"user12345\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/users/password-change/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								"password-change",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "http://localhost:8000",
+			"type": "string"
+		},
+		{
+			"key": "access",
+			"value": ""
+		},
+		{
+			"key": "refresh",
+			"value": ""
+		},
+		{
+			"key": "frontend_url",
+			"value": "http://localhost:3000",
+			"type": "string"
+		}
+	]
+}
