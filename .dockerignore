@@ -1,0 +1,9 @@
+# Ignore venv
+venv/
+
+# Ignore .git
+.git/
+.gitignore
+
+# Ignore editor config
+.vscode
